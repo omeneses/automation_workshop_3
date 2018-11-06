@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 /**
  * Hello world!
  *
@@ -20,9 +23,13 @@ public class App
         WebDriver driver;
         System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver");
         driver = new ChromeDriver();
+        //driver.manage().window().maximize();
+
 
         // Use this to visit any page
-        driver.get("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
+        //driver.get("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
+        driver.get("file:///Users/omeneses/Documents/automation/automation_workshop_3/WebDevelopment/add-content.html");
+
         // Alternatively the same thing can be done like this
         // driver.navigate().to("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
         //driver.navigate().forward();
@@ -48,6 +55,12 @@ public class App
         Thread.sleep(2000);
         select.selectByVisibleText("New York");
         Thread.sleep(2000);
+
+
+        //Verify Dropdown does not support multiple selection
+        assertFalse(select.isMultiple());
+        //Verify Dropdown has 3 options for selection
+        assertEquals(3, select.getOptions().size());
 
 
         // Click on any element by its id
