@@ -57,6 +57,7 @@ Icon
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+*.javascript-and-jquery-book-code-0915
 
 # Directories potentially created on remote AFP share
 .AppleDB

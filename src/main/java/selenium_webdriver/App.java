@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Set;
+
 /**
  * Hello world!
  *
@@ -23,68 +25,61 @@ public class App
         driver.get("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
         // Alternatively the same thing can be done like this
         // driver.navigate().to("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
+        //driver.navigate().forward();
+        //driver.navigate().back();
 
+        // Type something on an input element by its id
+        Thread.sleep(3000);
+        WebElement myInput = driver.findElement(By.id("type"));
+        myInput.sendKeys("Hello People");
 
 
         // Find the text of an element by its id
-        WebElement element2 = driver.findElement(By.id("translate"));
-        System.out.println("The button text is: " +element2.getText());
+        WebElement myTextElement = driver.findElement(By.id("translate"));
+        System.out.println("The button text is: " +myTextElement.getText());
 
 
         // Select an option of a Selector element by its id
         Select select = new Select(driver.findElement(By.tagName("select")));
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         select.selectByVisibleText("London");
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         select.selectByVisibleText("Paris");
-        Thread.sleep(3000);
+        Thread.sleep(2000);
+        select.selectByVisibleText("New York");
+        Thread.sleep(2000);
 
 
         // Click on any element by its id
         driver.findElement(By.id("translate")).click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         driver.findElement(By.id("translate")).click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         driver.findElement(By.id("translate")).click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         driver.findElement(By.id("translate")).click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
 
-       /* // Find the text of an element by its class
-        WebElement element2 = driver.findElement(By.className("gb_P"));
-        System.out.println("text typed is: " +element2.getText());
-
-
-
-        // Find the text input element by its name
-        WebElement element = driver.findElement(By.name("q"));
-
-        // Enter something to search for
-        element.sendKeys("Cheese!");
-
-
-
-        // Now submit the form. WebDriver will find the form for us from the element
-        element.submit();
-
-
-        // Check the title of the page
-        System.out.println("Page title is: " + driver.getTitle());
-
-        // Google's search is rendered dynamically with JavaScript.
-        // Wait for the page to load, timeout after 10 seconds
-        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().startsWith("cheese!");
+        // Moving between windows
+        String parent = driver.getWindowHandle();
+        System.out.println("The parent title is: " +driver.getTitle());
+        driver.findElement(By.name("google")).click();
+        Thread.sleep(2000);
+        Set<String> allWindows = driver.getWindowHandles();
+        System.out.println("The number of windows is: " +allWindows.size());
+        for(String child:allWindows){
+            if (!parent.equalsIgnoreCase(child)){
+                driver.switchTo().window(child);
+                driver.findElement(By.name("q")).sendKeys("Huge Inc");
+                System.out.println("The child page title is: " +driver.getTitle());
+                Thread.sleep(2000);
+                driver.close();
             }
-        });
+        }
+        driver.switchTo().window(parent);
+        System.out.println("The current page title is: " +driver.getTitle());
 
-
-
-
-        // Should see: "cheese! - Google Search"
-        System.out.println("Page title is: " + driver.getTitle());*/
 
         //Close the browser
         driver.quit();
