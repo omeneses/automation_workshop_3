@@ -3,8 +3,26 @@
    <head>
         <title>Constructive &amp; Co.</title>
         <link rel="stylesheet" href="css/c01.css"/>
+        <style>
+            #div1, #div2 {
+                float: left;
+                width: 100px;
+                height: 35px;
+                margin: 0px 0px 10px 50px;
+                padding: 10px;
+                border: 1px solid black;
+                }           
+        </style>
    </head>
    <body>
+        <h2>Drag and Drop</h2>
+        <p>Drag the image back and forth between the two div elements.</p>
+
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <img src="images/img_logo.png" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+        </div>
+
+        <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <h2 id="novia" class="chiqui">Te amo chiqui</h2>
         <button id="translate" class="button">Traducir</button>
         <h1>Constructive</h1>
@@ -21,8 +39,17 @@
             <option>Paris</option>
         </select>
         <a href="http://www.google.com" target="_blank" name="google"> Click this link to start the google page on a new Tab </a>
+        <button id="alerta" onclick="myFunction()" class="button2">Alert</button>
         
+            
+        <script>
+                function myFunction() {
+                    alert("Hello\nHow are you?");
+                }
+        </script>
         <script src='js/traducir.js'></script>
+        <script src="js/drag-drop.js"></script>
+            
     </body>
 
 </html>

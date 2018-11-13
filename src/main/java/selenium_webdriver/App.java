@@ -1,14 +1,19 @@
 package selenium_webdriver;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -22,20 +27,26 @@ public class App
     public static void main( String[] args ) throws InterruptedException {
         WebDriver driver;
         System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver");
+        //System.setProperty("webdriver.gecko.driver","src/test/resources/drivers/geckodriver");
+
+        //driver = new FirefoxDriver();
+
         driver = new ChromeDriver();
         //driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
 
 
         // Use this to visit any page
         //driver.get("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
-        driver.get("file:///Users/omeneses/Documents/automation/automation_workshop_3/WebDevelopment/add-content.html");
+        //driver.get("file:///Users/omeneses/Documents/automation/automation_workshop_3/WebDevelopment/add-content.html");
+        driver.get("file:///Users/admin/Documents/Omar/automation/automation_workshop_3/WebDevelopment/add-content.html");
 
         // Alternatively the same thing can be done like this
         // driver.navigate().to("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
         //driver.navigate().forward();
         //driver.navigate().back();
 
-        // Type something on an input element by its id
+        /*// Type something on an input element by its id
         Thread.sleep(3000);
         WebElement myInput = driver.findElement(By.id("type"));
         myInput.sendKeys("Hello People");
@@ -92,6 +103,37 @@ public class App
         }
         driver.switchTo().window(parent);
         System.out.println("The current page title is: " +driver.getTitle());
+
+        // Popup Dialogs
+        Thread.sleep(2000);
+        driver.findElement(By.id("alerta")).click();
+        Alert alert = driver.switchTo().alert();
+        Thread.sleep(2000);
+        System.out.println("The alert text button is: "+alert.getText());
+        alert.dismiss();
+        //alert.accept();
+        Thread.sleep(2000);
+        System.out.println("The page title is: " +driver.getTitle());*/
+
+
+        //Drag And Drop
+
+        //driver.findElement(By.name("source")).click();
+        Thread.sleep(4000);
+        new Actions(driver).dragAndDrop(driver.findElement(By.id("drag1")), driver.findElement(By.id("div2"))).build().perform();
+        Thread.sleep(4000);
+
+        //WebElement element = driver.findElement(By.id("drag1"));
+        //WebElement target = driver.findElement(By.id("div2"));
+
+        //(new Actions(driver)).dragAndDrop(element, target).perform();
+        //Actions builder = new Actions(driver);
+        //builder.dragAndDrop(element,target).build().perform();
+        //builder.build();
+
+
+        //builder.clickAndHold(element).moveToElement(target).release().build().perform();
+        //Thread.sleep(4000);
 
 
         //Close the browser
