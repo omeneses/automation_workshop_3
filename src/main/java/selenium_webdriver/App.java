@@ -1,19 +1,19 @@
 package selenium_webdriver;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,12 +26,14 @@ public class App
 {
     public static void main( String[] args ) throws InterruptedException {
         WebDriver driver;
-        System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver");
-        //System.setProperty("webdriver.gecko.driver","src/test/resources/drivers/geckodriver");
+        /*System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver");
+        driver = new ChromeDriver();*/
 
-        //driver = new FirefoxDriver();
 
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.gecko.driver","src/test/resources/drivers/geckodriver");
+
+        driver = new FirefoxDriver();
+
         //driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
 
@@ -39,7 +41,7 @@ public class App
         // Use this to visit any page
         //driver.get("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
         //driver.get("file:///Users/omeneses/Documents/automation/automation_workshop_3/WebDevelopment/add-content.html");
-        driver.get("file:///Users/admin/Documents/Omar/automation/automation_workshop_3/WebDevelopment/add-content.html");
+        //driver.get("file:///Users/admin/Documents/Omar/automation/automation_workshop_3/WebDevelopment/add-content.html");
 
         // Alternatively the same thing can be done like this
         // driver.navigate().to("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
@@ -116,27 +118,34 @@ public class App
         System.out.println("The page title is: " +driver.getTitle());*/
 
 
-        //Drag And Drop
+        //Right-click
 
-        //driver.findElement(By.name("source")).click();
+        driver.get("http://swisnl.github.io/jQuery-contextMenu/demo.html");
+        //To maximize the browser
+        driver.manage().window().maximize();
+        //Create an object 'action' of an Actions class
+        Actions action = new Actions(driver);
+        By locator = By.cssSelector(".context-menu-one");
+        //Wait for the element. Used Explicit wait
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        WebElement rightClickElement=driver.findElement(locator);
+        //contextClick() method to do right click on the element
+        action.contextClick(rightClickElement).build().perform();
         Thread.sleep(4000);
-        new Actions(driver).dragAndDrop(driver.findElement(By.id("drag1")), driver.findElement(By.id("div2"))).build().perform();
+        action.contextClick(rightClickElement)
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys(Keys.ARROW_DOWN)
+                .sendKeys(Keys.ENTER)
+                .perform();
+        Alert alert = driver.switchTo().alert();
+        assertThat(alert.getText(), is(equalTo("clicked: delete")));
         Thread.sleep(4000);
 
-        //WebElement element = driver.findElement(By.id("drag1"));
-        //WebElement target = driver.findElement(By.id("div2"));
-
-        //(new Actions(driver)).dragAndDrop(element, target).perform();
-        //Actions builder = new Actions(driver);
-        //builder.dragAndDrop(element,target).build().perform();
-        //builder.build();
-
-
-        //builder.clickAndHold(element).moveToElement(target).release().build().perform();
-        //Thread.sleep(4000);
-
-
-        //Close the browser
+         //Close the browser
         driver.quit();
     }
 }
