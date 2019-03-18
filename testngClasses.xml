@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Parallel Execution Classes" parallel="classes" thread-count="10">
+    <test name="TestNgParallelExecutionTestExample1">
+        <classes>
+            <class name="selenium_webdriver.ParallelExecutionClass1"/>
+            <class name="selenium_webdriver.ParallelExecutionClass2"/>
+        </classes>
+    </test>
+    <test name="TestNgParallelExecutionTestsExample2">
+        <classes>
+            <class name="selenium_webdriver.ParallelExecutionClass1"/>
+        </classes>
+    </test>
+</suite>

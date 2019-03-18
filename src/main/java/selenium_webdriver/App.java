@@ -38,9 +38,11 @@ public class App
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
 
 
+
+
         // Use this to visit any page
         //driver.get("file:///Users/admin/Documents/Omar/WebDevelopment/add-content.html");
-        //driver.get("file:///Users/omeneses/Documents/automation/automation_workshop_3/WebDevelopment/add-content.html");
+        driver.get("file:///Users/omeneses/Documents/automation/automation_workshop_3/WebDevelopment/add-content.html");
         //driver.get("file:///Users/admin/Documents/Omar/automation/automation_workshop_3/WebDevelopment/add-content.html");
 
         // Alternatively the same thing can be done like this
@@ -104,15 +106,16 @@ public class App
             }
         }
         driver.switchTo().window(parent);
-        System.out.println("The current page title is: " +driver.getTitle());
+        System.out.println("The current page title is: " +driver.getTitle());*/
 
-        // Popup Dialogs
+        /*// Popup Dialogs
         Thread.sleep(2000);
         driver.findElement(By.id("alerta")).click();
         Alert alert = driver.switchTo().alert();
         Thread.sleep(2000);
         System.out.println("The alert text button is: "+alert.getText());
-        alert.dismiss();
+        alert.accept();
+
         //alert.accept();
         Thread.sleep(2000);
         System.out.println("The page title is: " +driver.getTitle());*/
@@ -129,6 +132,7 @@ public class App
         //Wait for the element. Used Explicit wait
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
         WebElement rightClickElement=driver.findElement(locator);
         //contextClick() method to do right click on the element
         action.contextClick(rightClickElement).build().perform();

@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Parallel Execution Single" parallel="none">
+    <test name="TestNgParallelExecutionSingle">
+        <classes>
+            <class name="selenium_webdriver.ParallelExecutionClass1"/>
+            <class name="selenium_webdriver.ParallelExecutionClass2"/>
+        </classes>
+    </test>
+</suite>
